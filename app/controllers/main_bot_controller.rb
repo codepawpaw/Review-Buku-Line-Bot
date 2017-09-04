@@ -4,7 +4,8 @@ class MainBotController < ApplicationController
 
 	require 'sinatra'
 	require 'line/bot'
-	require 'goodreads_helper'
+	require 'rest-client'
+  	require 'nokogiri'
 
 	def client
 	  @client ||= Line::Bot::Client.new { |config|
@@ -28,32 +29,28 @@ class MainBotController < ApplicationController
 
 	      case event.type
 	      when Line::Bot::Event::MessageType::Text
-	      	message = {
-		        type: 'text',
-		        text: ''
-			}
-			client.reply_message(event['replyToken'], message)
-			# url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=" + param
-			# response = RestClient.get url
-			# doc = Nokogiri::XML(response)
-		 #    doc.search('//work').each do |element|
-		 #    	book_detail = element.at('best_book')
-		 #    	book = {
-		 #    		:id => element.at('id').text,
-		 #    		:publication_year => element.at('original_publication_year').text,
-		 #    		:rating => element.at('average_rating').text,
-		 #    		:ratings_count => element.at('ratings_count').text,
-		 #    		:title => book_detail.at('title').text,
-		 #    		:author => book_detail.at('author').at('name').text,
-		 #    		:image_url => book_detail.at('image_url').text
-		 #    	}
+	        url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=" + event.message['text']
+			response = RestClient.get url
 
-			# 	message = {
-		 #          type: 'text',
-		 #          text: book[:rating]
-			#     }
-			#     client.reply_message(event['replyToken'], message)
-			# end
+			doc = Nokogiri::XML(response)
+		    doc.search('//work').each do |element|
+		    	book_detail = element.at('best_book')
+		    	book = {
+		    		:id => element.at('id').text,
+		    		:publication_year => element.at('original_publication_year').text,
+		    		:rating => element.at('average_rating').text,
+		    		:ratings_count => element.at('ratings_count').text,
+		    		:title => book_detail.at('title').text,
+		    		:author => book_detail.at('author').at('name').text,
+		    		:image_url => book_detail.at('image_url').text
+		    	}
+
+				message = {
+		          type: 'text',
+		          text: book[:rating]
+			    }
+			    client.reply_message(event['replyToken'], message)
+			end
 	      when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
 	        response = client.get_message_content(event.message['id'])
 	        tf = Tempfile.open("content")
