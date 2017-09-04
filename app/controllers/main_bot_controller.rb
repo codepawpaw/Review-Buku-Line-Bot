@@ -37,7 +37,7 @@ class MainBotController < ApplicationController
 			counter = 0
 		    doc.search('//work').each do |element|
 		    	p counter
-		    	if counter > 5 then
+		    	if counter > 4 then
 		    		p 'masuk' 
 		    		p @messages
 		    		client.reply_message(event['replyToken'], messages)
