@@ -67,7 +67,7 @@ class MainBotController < ApplicationController
 			end
 			p @messages
 			client.reply_message(event['replyToken'], @messages[0..4])
-			client.reply_message(event['replyToken'], @messages[5..8])
+			client.reply_message(event['replyToken'], @messages[5..7])
 	      when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
 	        response = client.get_message_content(event.message['id'])
 	        tf = Tempfile.open("content")
