@@ -40,10 +40,7 @@ class MainBotController < ApplicationController
 			counter = 0
 		    doc.search('//work').each do |element|
 		    	p counter
-		    	if counter > 4 then
-		    		p 'masuk' 
-		    		p @messages
-		    		client.reply_message(event['replyToken'], @messages)
+		    	if counter > 7 then
 		    		break
 		    	end
 
@@ -70,7 +67,7 @@ class MainBotController < ApplicationController
 			    counter = counter + 1
 			    
 			end
-			
+			client.reply_message(event['replyToken'], @messages)
 	      when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
 	        response = client.get_message_content(event.message['id'])
 	        tf = Tempfile.open("content")
