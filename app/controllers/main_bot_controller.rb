@@ -43,7 +43,7 @@ class MainBotController < ApplicationController
 		    	if counter > 4 then
 		    		p 'masuk' 
 		    		p @messages
-		    		client.reply_message(event['replyToken'], messages)
+		    		client.reply_message(event['replyToken'], @messages)
 		    		break
 		    	end
 
