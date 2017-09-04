@@ -22,9 +22,10 @@ class MainBotController < ApplicationController
 	    error 400 do 'Bad Request' end
 	  end
 
-	  p event
+
 
 	  events = client.parse_events_from(body)
+	  p events
 	  events.each { |event|
 	    case event
 	    when Line::Bot::Event::Message
