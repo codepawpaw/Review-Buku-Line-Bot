@@ -38,7 +38,7 @@ class MainBotController < ApplicationController
 		 #    	book = {
 		 #    		:id => element.at('id').text,
 		 #    		:publication_year => element.at('original_publication_year').text,
-		 #    		:rating => element.at('average_rati	ng').text,
+		 #    		:rating => element.at('average_rating').text,
 		 #    		:ratings_count => element.at('ratings_count').text,
 		 #    		:title => book_detail.at('title').text,
 		 #    		:author => book_detail.at('author').at('name').text,
@@ -64,12 +64,8 @@ class MainBotController < ApplicationController
 	  #     end
 	  #   end
 	  # }
-	  		body = request.body.read
-	  		events = client.parse_events_from(body)
 
-	  		events.each { |event|
-
-		  		url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=" + event.message['text']
+		  		url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=of+mice+and+men"
 				response = RestClient.get url
 
 				doc = Nokogiri::XML(response)
@@ -78,20 +74,14 @@ class MainBotController < ApplicationController
 			    	book = {
 			    		:id => element.at('id').text,
 			    		:publication_year => element.at('original_publication_year').text,
-			    		:rating => element.at('average_rati	ng').text,
+			    		:rating => element.at('average_rating').text,
 			    		:ratings_count => element.at('ratings_count').text,
 			    		:title => book_detail.at('title').text,
 			    		:author => book_detail.at('author').at('name').text,
 			    		:image_url => book_detail.at('image_url').text
 			    	}
-
-					message = {
-			          type: 'text',
-			          text: book[:rating]
-				    }
-				    client.reply_message(event['replyToken'], message)
+			    	p book[:rating]
 				end
-			}
 
 	  json_response([])
 	end
