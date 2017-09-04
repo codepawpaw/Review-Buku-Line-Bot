@@ -1,28 +1,26 @@
-== README
+== Review Buku Line Bot
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Virtual Asisstant in Line Messenger for searching book rating.
+This repo shows you a practical use of the Line Messaging API.
 
-Things you may want to cover:
+This project use ruby on rails without active record
 
-* Ruby version
+== Getting Started
 
-* System dependencies
+`````
+$ clone this repo
+$ bundle install
+$ rails s
+`````
 
-* Configuration
+== Notes
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+https://developers.line.me
+https://admin-official.line.me/
+https://devdocs.line.me/en/
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Contributor : 
+
+Jonathan
+Hierony Manurung
