@@ -28,6 +28,7 @@ module GoodreadsBot
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.assets.initialize_on_precompile = false
+    config.web_console.development_only = false
     #config.web_console.development_only = false
   end
 end

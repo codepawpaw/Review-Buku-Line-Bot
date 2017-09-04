@@ -4,8 +4,7 @@ class MainBotController < ApplicationController
 
 	require 'sinatra'
 	require 'line/bot'
-	require 'rest-client'
-  	require 'nokogiri'
+	require 'goodreads_helper'
 
 	def client
 	  @client ||= Line::Bot::Client.new { |config|
@@ -29,10 +28,7 @@ class MainBotController < ApplicationController
 
 	      case event.type
 	      when Line::Bot::Event::MessageType::Text
-	        url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=" + event.message['text']
-			response = RestClient.get url
-
-			doc = Nokogiri::XML(response)
+			doc = GoodreadsHelper.search(event.message['text'])
 		    doc.search('//work').each do |element|
 		    	book_detail = element.at('best_book')
 		    	book = {
