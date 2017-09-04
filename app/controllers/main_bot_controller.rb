@@ -28,6 +28,11 @@ class MainBotController < ApplicationController
 
 	      case event.type
 	      when Line::Bot::Event::MessageType::Text
+	      	message = {
+		        type: 'text',
+		        text: ''
+			}
+			client.reply_message(event['replyToken'], message)
 			doc = GoodreadsHelper.search(event.message['text'])
 		    doc.search('//work').each do |element|
 		    	book_detail = element.at('best_book')
