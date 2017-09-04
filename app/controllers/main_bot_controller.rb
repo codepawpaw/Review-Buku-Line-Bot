@@ -29,28 +29,28 @@ class MainBotController < ApplicationController
 
 	      case event.type
 	      when Line::Bot::Event::MessageType::Text
-	        url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=" + event.message['text']
-			response = RestClient.get url
+	  #       url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=" + event.message['text']
+			# response = RestClient.get url
 
-			doc = Nokogiri::XML(response)
-		    doc.search('//work').each do |element|
-		    	book_detail = element.at('best_book')
-		    	book = {
-		    		:id => element.at('id').text,
-		    		:publication_year => element.at('original_publication_year').text,
-		    		:rating => element.at('average_rati	ng').text,
-		    		:ratings_count => element.at('ratings_count').text,
-		    		:title => book_detail.at('title').text,
-		    		:author => book_detail.at('author').at('name').text,
-		    		:image_url => book_detail.at('image_url').text
-		    	}
+			# doc = Nokogiri::XML(response)
+		 #    doc.search('//work').each do |element|
+		 #    	book_detail = element.at('best_book')
+		 #    	book = {
+		 #    		:id => element.at('id').text,
+		 #    		:publication_year => element.at('original_publication_year').text,
+		 #    		:rating => element.at('average_rati	ng').text,
+		 #    		:ratings_count => element.at('ratings_count').text,
+		 #    		:title => book_detail.at('title').text,
+		 #    		:author => book_detail.at('author').at('name').text,
+		 #    		:image_url => book_detail.at('image_url').text
+		 #    	}
 
-				message = {
-		          type: 'text',
-		          text: book[:rating]
-			    }
-			    client.reply_message(event['replyToken'], message)
-			end
+			# 	message = {
+		 #          type: 'text',
+		 #          text: book[:rating]
+			#     }
+			#     client.reply_message(event['replyToken'], message)
+			# end
 			message = {
 		          type: 'text',
 		          text: 'asd'
