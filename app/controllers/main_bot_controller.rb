@@ -33,6 +33,7 @@ class MainBotController < ApplicationController
 			response = RestClient.get url
 
 			doc = Nokogiri::XML(response)
+			@messages = []
 		    doc.search('//work').each do |element|
 		    	book_detail = element.at('best_book')
 		    	book = {
@@ -45,12 +46,18 @@ class MainBotController < ApplicationController
 		    		:image_url => book_detail.at('image_url').text
 		    	}
 
+		    	
+
 				message = {
 		          type: 'text',
 		          text: book[:rating]
 			    }
-			    client.reply_message(event['replyToken'], message)
+
+			    @messages << message
+			    #client.reply_message(event['replyToken'], message)
+			    
 			end
+			client.reply_message(event['replyToken'], messages)
 	      when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
 	        response = client.get_message_content(event.message['id'])
 	        tf = Tempfile.open("content")
