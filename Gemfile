@@ -15,8 +15,6 @@ gem 'rest-client'
 gem 'line-bot-api'
 
 gem 'sinatra'
-
-gem 'sqlite3'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
