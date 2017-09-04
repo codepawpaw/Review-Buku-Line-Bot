@@ -33,7 +33,9 @@ class MainBotController < ApplicationController
 		        text: ''
 			}
 			client.reply_message(event['replyToken'], message)
-			doc = GoodreadsHelper.search(event.message['text'])
+			url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=" + param
+			response = RestClient.get url
+			doc = Nokogiri::XML(response)
 		    doc.search('//work').each do |element|
 		    	book_detail = element.at('best_book')
 		    	book = {
