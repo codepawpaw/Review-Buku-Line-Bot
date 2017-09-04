@@ -7,11 +7,17 @@ This project use ruby on rails without active record
 
 == Getting Started
 
-`````
+```bash
 $ clone this repo
+```
+
+```bash
 $ bundle install
+```
+
+```bash
 $ rails s
-`````
+```
 
 == Notes
 
