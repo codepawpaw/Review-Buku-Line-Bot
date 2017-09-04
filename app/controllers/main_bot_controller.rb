@@ -36,6 +36,7 @@ class MainBotController < ApplicationController
 			@messages = []
 			counter = 0
 		    doc.search('//work').each do |element|
+		    	p counter
 		    	if counter > 5 then
 		    		break
 		    	end
@@ -59,12 +60,12 @@ class MainBotController < ApplicationController
 			    }
 
 			    @messages << message
-			    client.reply_message(event['replyToken'], message)
+			    #client.reply_message(event['replyToken'], message)
 
 			    counter = counter + 1
 			    
 			end
-			#client.reply_message(event['replyToken'], messages)
+			client.reply_message(event['replyToken'], messages)
 	      when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
 	        response = client.get_message_content(event.message['id'])
 	        tf = Tempfile.open("content")
