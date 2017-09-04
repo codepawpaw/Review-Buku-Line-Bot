@@ -34,7 +34,12 @@ class MainBotController < ApplicationController
 
 			doc = Nokogiri::XML(response)
 			@messages = []
+			counter = 0
 		    doc.search('//work').each do |element|
+		    	if counter > 5 then
+		    		break
+		    	end
+
 		    	book_detail = element.at('best_book')
 		    	book = {
 		    		:id => element.at('id').text,
@@ -55,6 +60,8 @@ class MainBotController < ApplicationController
 
 			    @messages << message
 			    client.reply_message(event['replyToken'], message)
+
+			    counter = counter + 1
 			    
 			end
 			#client.reply_message(event['replyToken'], messages)
