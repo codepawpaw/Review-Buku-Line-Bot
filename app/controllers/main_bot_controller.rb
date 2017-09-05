@@ -42,8 +42,6 @@ class MainBotController < ApplicationController
 		    		break
 		    	end
 
-		    	p element
-		    	
 		    	book_detail = element.at('best_book')
 		    	book = {
 		    		:id => element.at('id').text,
@@ -52,13 +50,14 @@ class MainBotController < ApplicationController
 		    		:ratings_count => element.at('ratings_count').text,
 		    		:title => book_detail.at('title').text,
 		    		:author => book_detail.at('author').at('name').text,
-		    		:image_url => book_detail.at('image_url').text
+		    		:image_url => book_detail.at('image_url').text,
+		    		:small_image_url => book_detail.at('small_image_url').text
 		    	}
 
 		    	image_message = {
 		    		type: 'image',
 		    		originalContentUrl: book[:image_url],
-		    		previewImageUrl: book[:image_url]
+		    		previewImageUrl: book[:small_image_url]
 		    	}
 
 		    	@messages << image_message
