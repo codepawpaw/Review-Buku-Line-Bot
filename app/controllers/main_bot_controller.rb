@@ -22,8 +22,6 @@ class MainBotController < ApplicationController
 	    error 400 do 'Bad Request' end
 	  end
 
-
-
 	  events = client.parse_events_from(body)
 	  p events
 	  events.each { |event|
@@ -40,7 +38,7 @@ class MainBotController < ApplicationController
 			counter = 0
 		    doc.search('//work').each do |element|
 		    	p counter
-		    	if counter > 7 then
+		    	if counter > 6 then
 		    		break
 		    	end
 
@@ -57,18 +55,15 @@ class MainBotController < ApplicationController
 
 				message = {
 		          type: 'text',
-		          text: book[:rating]
+		          text: book[:] + "/n" + book[:rating]
 			    }
 
 			    @messages << message
-			    #client.reply_message(event['replyToken'], message)
 			    counter = counter + 1
+			    client.reply_message(event['replyToken'], message)
 			    
 			end
-			@test = @messages[5..7]
-			p @messages
-			client.reply_message(event['replyToken'], @messages[0..4])
-			client.push_message(event['source'].userId, @test)
+			#client.reply_message(event['replyToken'], @messages[0..4])
 	      when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
 	        response = client.get_message_content(event.message['id'])
 	        tf = Tempfile.open("content")
