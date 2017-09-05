@@ -53,17 +53,24 @@ class MainBotController < ApplicationController
 		    		:image_url => book_detail.at('image_url').text
 		    	}
 
+		    	message = {
+		    		type: 'image',
+		    		originalContentUrl: book[image_url],
+		    		previewImageUrl: book[]image_url
+		    	}
+
+		    	@messages << message
+
 				message = {
 		          type: 'text',
-		          text: book[:] + "/n" + book[:rating]
+		          text: book[:title] + "/n" + book[:rating]
 			    }
 
 			    @messages << message
 			    counter = counter + 1
-			    client.reply_message(event['replyToken'], message)
 			    
 			end
-			#client.reply_message(event['replyToken'], @messages[0..4])
+			client.reply_message(event['replyToken'], @messages[0..3])
 	      when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
 	        response = client.get_message_content(event.message['id'])
 	        tf = Tempfile.open("content")
