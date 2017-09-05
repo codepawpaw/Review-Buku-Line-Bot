@@ -53,20 +53,20 @@ class MainBotController < ApplicationController
 		    		:image_url => book_detail.at('image_url').text
 		    	}
 
-		    	message = {
+		    	image_message = {
 		    		type: 'image',
-		    		originalContentUrl: book[image_url],
-		    		previewImageUrl: book[]image_url
+		    		originalContentUrl: book[:image_url],
+		    		previewImageUrl: book[:image_url]
 		    	}
 
-		    	@messages << message
+		    	@messages << image_message
 
-				message = {
+				text_message = {
 		          type: 'text',
 		          text: book[:title] + "/n" + book[:rating]
 			    }
 
-			    @messages << message
+			    @messages << text_message
 			    counter = counter + 1
 			    
 			end
