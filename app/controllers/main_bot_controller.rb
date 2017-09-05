@@ -56,7 +56,7 @@ class MainBotController < ApplicationController
 
 		    	image_message = {
 		    		type: 'imagemap',
-		    		baseUrl: book[:image_url],
+		    		baseUrl: book[:image_url] + "/300",
 		    		altText: 'this is an imagemap',
 		    		baseSize: {
 					    height: 300,
