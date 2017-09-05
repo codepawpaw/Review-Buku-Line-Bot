@@ -55,25 +55,9 @@ class MainBotController < ApplicationController
 		    	}
 
 		    	image_message = {
-		    		type: 'imagemap',
-		    		baseUrl: book[:image_url] + "/300",
-		    		altText: 'this is an imagemap',
-		    		baseSize: {
-					    height: 300,
-					    width: 300
-					},
-					"actions": [
-					    {
-					        "type": "uri",
-					        "linkUri": "https://facebook.com",
-					        "area": {
-					            "x": 0,
-					            "y": 0,
-					            "width": 300,
-					            "height": 300
-					        }
-					    }
-					]
+		    		type: 'image',
+		    		originalContentUrl: book[:image_url],
+		    		previewImageUrl: book[:image_url]
 		    	}
 
 		    	@messages << image_message
