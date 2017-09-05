@@ -57,7 +57,11 @@ class MainBotController < ApplicationController
 		    	image_message = {
 		    		type: 'image',
 		    		originalContentUrl: book[:small_image_url],
-		    		previewImageUrl: book[:small_image_url]
+		    		previewImageUrl: book[:small_image_url],
+		    		baseSize: {
+					    height: 300,
+					    width: 300
+					}
 		    	}
 
 		    	@messages << image_message
