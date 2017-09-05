@@ -41,7 +41,9 @@ class MainBotController < ApplicationController
 		    	if counter > 6 then
 		    		break
 		    	end
+
 		    	p element
+		    	
 		    	book_detail = element.at('best_book')
 		    	book = {
 		    		:id => element.at('id').text,
