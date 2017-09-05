@@ -63,7 +63,7 @@ class MainBotController < ApplicationController
 
 				text_message = {
 		          type: 'text',
-		          text: book[:title] + "/n" + book[:rating]
+		          text: book[:title] + "\n" + book[:rating]
 			    }
 
 			    @messages << text_message
