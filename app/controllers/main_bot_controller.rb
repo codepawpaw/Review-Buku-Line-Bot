@@ -27,7 +27,7 @@ class MainBotController < ApplicationController
 	  events.each { |event|
 	    case event
 	    when Line::Bot::Event::Message
-	      
+	      p event.type
 	      p event["message"]["type"]
 	      p Line::Bot::Event::MessageType::Image
 
