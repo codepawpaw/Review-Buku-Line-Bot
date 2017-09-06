@@ -86,9 +86,9 @@ class MainBotController < ApplicationController
 			  p 'masuk mas'
 			  # tf = Tempfile.open("content")
 			  f = File.open("mytempfile.png", "w")
-			  f.write(response.body)
+			  #f.write(response.body)
 			  p f
-			  f.close
+			  #f.close
 			else
 			  p "#{response.code} #{response.body}"
 			end
