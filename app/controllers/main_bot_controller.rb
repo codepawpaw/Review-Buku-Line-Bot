@@ -25,11 +25,8 @@ class MainBotController < ApplicationController
 	  events = client.parse_events_from(body)
 
 	  events.each { |event|
-	    case event
-	    when Line::Bot::Event::Message
-	    	
-	      case event.type
-	      when Line::Bot::Event::MessageType::Text
+	  	
+	      if event.type == Line::Bot::Event::MessageType::Text
 	        url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=" + event.message['text']
 			response = RestClient.get url
 
@@ -74,14 +71,13 @@ class MainBotController < ApplicationController
 			client.reply_message(event['replyToken'], @messages[0..3])
 		  end
 
-	      when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
+		  if event.type == Line::Bot::Event::MessageType::Image
 	        # response = client.get_message_content(event.message['id'])
 	        # tf = Tempfile.open("content")
 	        # tf.write(response.body)
 	        p "masuk"
 	        client.reply_message(event['replyToken'], 'you request image type message')
 	      end
-	    end
 	  }
 
 	  json_response([])
