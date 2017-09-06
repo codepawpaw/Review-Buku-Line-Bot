@@ -85,8 +85,10 @@ class MainBotController < ApplicationController
 			when Net::HTTPSuccess then
 			  p 'masuk mas'
 			  # tf = Tempfile.open("content")
-			  # tf.write(response.body)
-			  p response.body
+			  f = File.open("mytempfile.png", "w")
+			  f.write(response.body)
+			  p f
+			  f.close
 			else
 			  p "#{response.code} #{response.body}"
 			end
