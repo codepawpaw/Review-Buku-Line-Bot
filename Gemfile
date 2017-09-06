@@ -12,6 +12,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'rest-client'
 
+gem 'google-cloud-vision'
+
 gem 'line-bot-api'
 
 gem 'sinatra'

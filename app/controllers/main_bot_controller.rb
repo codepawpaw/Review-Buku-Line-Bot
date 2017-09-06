@@ -8,6 +8,13 @@ class MainBotController < ApplicationController
   	require 'nokogiri'
   	require 'tempfile'
 
+  	require "google/cloud/vision"
+
+	# Your Google Cloud Platform project ID
+	project_id = "baca-pesat"
+
+	vision = Google::Cloud::Vision.new project: project_id
+
 	def client
 	  @client ||= Line::Bot::Client.new { |config|
 	    config.channel_secret = "57608b508df7cad2ba2b4f18440cf95e"
@@ -75,22 +82,23 @@ class MainBotController < ApplicationController
 		  if event.type == Line::Bot::Event::MessageType::Image
 		  	p event.message['id']
 	        response = client.get_message_content(event.message['id'])
-			
-			# url = "https://api.line.me/v2/bot/message/"+event.message['id']+"/content"
 
-			# response = RestClient.get url, {:Authorization => 'Bearer IkgWgy3zjhWfy0V7sF90RqC655An+TGB/kIHzK9YWe78V/dmbBbwdU3aFufvF4+RBK3c4gno7TPoP04IqhQgIQvkiwuaqyXBaARZC/M0lwDDo1BbosW4IKr+AZyxSCHP2B/8puctiyCdtTuWrbg8PQdB04t89/1O/w1cDnyilFU='}
-			
-			# p response.body
 			case response
 			when Net::HTTPSuccess then
 			  p 'masuk mas'
-			  # tf = Tempfile.open("content")
 			  binary_data = Base64.decode64(response.body)
 			  f = File.open('file_name', 'wb') {|f| f.write(binary_data)}
-			  #f = File.open("mytempfile.png", "w")
-			  #f.write(response.body)
 			  p f
-			  #f.close
+
+			  file_name = f
+
+			  # Performs label detection on the image file
+			  labels = vision.image(file_name).labels
+
+			  puts "Labels:"
+			  labels.each do |label|
+			    puts label.description
+			  end
 			else
 			  p "#{response.code} #{response.body}"
 			end
