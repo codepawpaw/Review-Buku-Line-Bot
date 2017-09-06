@@ -27,10 +27,7 @@ class MainBotController < ApplicationController
 	  events.each { |event|
 	    case event
 	    when Line::Bot::Event::Message
-	      p event.type
-	      p event["message"]["type"]
-	      p Line::Bot::Event::MessageType::Image
-
+	    	
 	      case event.type
 	      when Line::Bot::Event::MessageType::Text
 	        url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=" + event.message['text']
@@ -75,17 +72,14 @@ class MainBotController < ApplicationController
 			    
 			end
 			client.reply_message(event['replyToken'], @messages[0..3])
+		  end
 
 	      when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
 	        # response = client.get_message_content(event.message['id'])
 	        # tf = Tempfile.open("content")
 	        # tf.write(response.body)
-	        
-	      end
-
-	      case event.message.type
-	      when Line::Bot::Event::MessageType::Image
-	      	client.reply_message(event['replyToken'], 'you request image type message')
+	        p "masuk"
+	        client.reply_message(event['replyToken'], 'you request image type message')
 	      end
 	    end
 	  }
