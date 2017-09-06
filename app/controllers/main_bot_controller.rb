@@ -72,16 +72,17 @@ class MainBotController < ApplicationController
 		  end
 
 		  if event.type == Line::Bot::Event::MessageType::Image
-		  	p event
+		  	p event.message['id']
 	        #response = client.get_message_content(event.message['id'])
 	        response = client.get_message_content(event.message['id'])
-			case response
-			when Net::HTTPSuccess then
-			  tf = Tempfile.open("content")
-			  tf.write(response.body)
-			else
-			  p "#{response.code} #{response.body}"
-			end
+			p response
+			# case response
+			# when Net::HTTPSuccess then
+			#   tf = Tempfile.open("content")
+			#   tf.write(response.body)
+			# else
+			#   p "#{response.code} #{response.body}"
+			# end
 
 	        text_message = {
 		        type: 'text',
