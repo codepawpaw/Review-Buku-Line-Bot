@@ -72,7 +72,8 @@ class MainBotController < ApplicationController
 		  end
 
 		  if event.type == Line::Bot::Event::MessageType::Image
-	        # response = client.get_message_content(event.message['id'])
+		  	p event
+	        response = client.get_message_content(event.message['id'])
 	        # tf = Tempfile.open("content")
 	        # tf.write(response.body)
 	        text_message = {
