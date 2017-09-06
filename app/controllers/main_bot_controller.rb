@@ -10,11 +10,6 @@ class MainBotController < ApplicationController
 
   	require "google/cloud/vision"
 
-	# Your Google Cloud Platform project ID
-	project_id = "baca-pesat"
-
-	vision = Google::Cloud::Vision.new project: project_id
-
 	def client
 	  @client ||= Line::Bot::Client.new { |config|
 	    config.channel_secret = "57608b508df7cad2ba2b4f18440cf95e"
@@ -90,15 +85,14 @@ class MainBotController < ApplicationController
 			  f = File.open('file_name', 'wb') {|f| f.write(binary_data)}
 			  p f
 
-			  file_name = f
+			  # Your Google Cloud Platform project ID
+			  project_id = "baca-pesat"
 
-			  # Performs label detection on the image file
-			  labels = vision.image(file_name).labels
+			  vision = Google::Cloud::Vision.new project: project_id
 
-			  puts "Labels:"
-			  labels.each do |label|
-			    puts label.description
-			  end
+			  image  = vision.image f
+
+			  puts image.text
 			else
 			  p "#{response.code} #{response.body}"
 			end
