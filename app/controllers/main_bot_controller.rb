@@ -84,8 +84,9 @@ class MainBotController < ApplicationController
 			case response
 			when Net::HTTPSuccess then
 			  p 'masuk mas'
-			  tf = Tempfile.open("content")
-			  tf.write(response.body)
+			  # tf = Tempfile.open("content")
+			  # tf.write(response.body)
+			  p response.body
 			else
 			  p "#{response.code} #{response.body}"
 			end
