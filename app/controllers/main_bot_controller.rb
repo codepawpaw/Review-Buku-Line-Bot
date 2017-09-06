@@ -90,7 +90,7 @@ class MainBotController < ApplicationController
 			  #f = File.open("mytempfile.png", "w")
 			  #f.write(response.body)
 			  p f
-			  f.close
+			  #f.close
 			else
 			  p "#{response.code} #{response.body}"
 			end
