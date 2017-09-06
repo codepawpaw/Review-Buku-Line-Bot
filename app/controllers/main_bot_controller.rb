@@ -90,9 +90,11 @@ class MainBotController < ApplicationController
 
 			  vision = Google::Cloud::Vision.new project: project_id
 
-			  image  = vision.image f
+			  # image  = vision.image f
 
-			  puts image.text
+			  # puts image.text
+
+			  p "end"
 			else
 			  p "#{response.code} #{response.body}"
 			end
