@@ -74,7 +74,10 @@ class MainBotController < ApplicationController
 		  if event.type == Line::Bot::Event::MessageType::Image
 		  	p event.message['id']
 	        #response = client.get_message_content(event.message['id'])
-	        response = client.get_message_content(event.message['id'])
+	        #response = client.get_message_content(event.message['id'])
+			
+			url = "https://api.line.me/v2/bot/message/"+event.message['id']+"/content"
+			response = RestClient.get url
 			p response
 			# case response
 			# when Net::HTTPSuccess then
