@@ -27,7 +27,9 @@ class MainBotController < ApplicationController
 	  events.each { |event|
 	    case event
 	    when Line::Bot::Event::Message
+	      
 	      p event["message"]["type"]
+
 	      case event.type
 	      when Line::Bot::Event::MessageType::Text
 	        url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=" + event.message['text']
