@@ -29,6 +29,7 @@ class MainBotController < ApplicationController
 	    when Line::Bot::Event::Message
 	      
 	      p event["message"]["type"]
+	      p Line::Bot::Event::MessageType::Image
 
 	      case event.type
 	      when Line::Bot::Event::MessageType::Text
