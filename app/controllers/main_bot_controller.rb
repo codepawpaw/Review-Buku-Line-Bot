@@ -10,6 +10,8 @@ class MainBotController < ApplicationController
 
   	require "google/cloud/vision"
 
+  	vision = Google::Cloud::Vision.new project: 'baca-pesat'
+
 	def client
 	  @client ||= Line::Bot::Client.new { |config|
 	    config.channel_secret = "57608b508df7cad2ba2b4f18440cf95e"
@@ -84,11 +86,6 @@ class MainBotController < ApplicationController
 			  binary_data = Base64.decode64(response.body)
 			  f = File.open('file_name', 'wb') {|f| f.write(binary_data)}
 			  p f
-
-			  # Your Google Cloud Platform project ID
-			  project_id = "baca-pesat"
-
-			  vision = Google::Cloud::Vision.new project: project_id
 
 			  # image  = vision.image f
 
