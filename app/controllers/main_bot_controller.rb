@@ -77,7 +77,12 @@ class MainBotController < ApplicationController
 	        # response = client.get_message_content(event.message['id'])
 	        # tf = Tempfile.open("content")
 	        # tf.write(response.body)
-	        client.reply_message(event['replyToken'], 'you request image type message')
+	        
+	      end
+
+	      case event.message.type
+	      when Line::Bot::Event::MessageType::Image
+	      	client.reply_message(event['replyToken'], 'you request image type message')
 	      end
 	    end
 	  }
