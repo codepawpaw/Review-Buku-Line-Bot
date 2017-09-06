@@ -77,9 +77,9 @@ class MainBotController < ApplicationController
 	        #response = client.get_message_content(event.message['id'])
 			
 			url = "https://api.line.me/v2/bot/message/"+event.message['id']+"/content"
-			response = RestClient.get url
-			RestClient::Request.execute(method: :get, url: url,
-                            timeout: 10, headers: {vAuthorization: 'Bearer IkgWgy3zjhWfy0V7sF90RqC655An+TGB/kIHzK9YWe78V/dmbBbwdU3aFufvF4+RBK3c4gno7TPoP04IqhQgIQvkiwuaqyXBaARZC/M0lwDDo1BbosW4IKr+AZyxSCHP2B/8puctiyCdtTuWrbg8PQdB04t89/1O/w1cDnyilFU='})
+
+			response = RestClient.get url, {:Authorization => 'Bearer IkgWgy3zjhWfy0V7sF90RqC655An+TGB/kIHzK9YWe78V/dmbBbwdU3aFufvF4+RBK3c4gno7TPoP04IqhQgIQvkiwuaqyXBaARZC/M0lwDDo1BbosW4IKr+AZyxSCHP2B/8puctiyCdtTuWrbg8PQdB04t89/1O/w1cDnyilFU='}
+			
 			p response
 			# case response
 			# when Net::HTTPSuccess then
