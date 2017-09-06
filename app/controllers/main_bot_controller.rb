@@ -72,14 +72,14 @@ class MainBotController < ApplicationController
 		  end
 
 		  if event.type == Line::Bot::Event::MessageType::Image
-	        response = client.get_message_content(event.message['id'])
-	        tf = Tempfile.open("content")
-	        tf.write(response.body)
+	        # response = client.get_message_content(event.message['id'])
+	        # tf = Tempfile.open("content")
+	        # tf.write(response.body)
 	        text_message = {
 		        type: 'text',
 		        text: 'image message'
 			}
-	        client.reply_message(event['replyToken'],text_message)
+	        client.reply_message(event['replyToken'], text_message)
 	      end
 	  }
 
