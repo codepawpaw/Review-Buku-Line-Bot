@@ -6,6 +6,7 @@ class MainBotController < ApplicationController
 	require 'line/bot'
 	require 'rest-client'
   	require 'nokogiri'
+  	require 'tempfile'
 
 	def client
 	  @client ||= Line::Bot::Client.new { |config|
@@ -73,21 +74,21 @@ class MainBotController < ApplicationController
 
 		  if event.type == Line::Bot::Event::MessageType::Image
 		  	p event.message['id']
-	        #response = client.get_message_content(event.message['id'])
-	        #response = client.get_message_content(event.message['id'])
+	        response = client.get_message_content(event.message['id'])
 			
-			url = "https://api.line.me/v2/bot/message/"+event.message['id']+"/content"
+			# url = "https://api.line.me/v2/bot/message/"+event.message['id']+"/content"
 
-			response = RestClient.get url, {:Authorization => 'Bearer IkgWgy3zjhWfy0V7sF90RqC655An+TGB/kIHzK9YWe78V/dmbBbwdU3aFufvF4+RBK3c4gno7TPoP04IqhQgIQvkiwuaqyXBaARZC/M0lwDDo1BbosW4IKr+AZyxSCHP2B/8puctiyCdtTuWrbg8PQdB04t89/1O/w1cDnyilFU='}
+			# response = RestClient.get url, {:Authorization => 'Bearer IkgWgy3zjhWfy0V7sF90RqC655An+TGB/kIHzK9YWe78V/dmbBbwdU3aFufvF4+RBK3c4gno7TPoP04IqhQgIQvkiwuaqyXBaARZC/M0lwDDo1BbosW4IKr+AZyxSCHP2B/8puctiyCdtTuWrbg8PQdB04t89/1O/w1cDnyilFU='}
 			
-			p response.body
-			# case response
-			# when Net::HTTPSuccess then
-			#   tf = Tempfile.open("content")
-			#   tf.write(response.body)
-			# else
-			#   p "#{response.code} #{response.body}"
-			# end
+			# p response.body
+			case response
+			when Net::HTTPSuccess then
+			  p 'masuk mas'
+			  tf = Tempfile.open("content")
+			  tf.write(response.body)
+			else
+			  p "#{response.code} #{response.body}"
+			end
 
 	        text_message = {
 		        type: 'text',
