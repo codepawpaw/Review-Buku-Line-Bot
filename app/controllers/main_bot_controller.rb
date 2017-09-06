@@ -10,7 +10,9 @@ class MainBotController < ApplicationController
 
   	require "google/cloud/vision"
 
-  	vision = Google::Cloud::Vision.new project: 'baca-pesat'
+  	def vision
+  	  @vision ||= Google::Cloud::Vision.new project: 'baca-pesat'
+  	end
 
 	def client
 	  @client ||= Line::Bot::Client.new { |config|
@@ -87,7 +89,7 @@ class MainBotController < ApplicationController
 			  f = File.open('file_name', 'wb') {|f| f.write(binary_data)}
 			  p f
 
-			  # image  = vision.image f
+			  image  = vision.image f
 
 			  # puts image.text
 
