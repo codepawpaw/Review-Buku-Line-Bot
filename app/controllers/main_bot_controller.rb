@@ -90,7 +90,7 @@ class MainBotController < ApplicationController
 			  p File.basename('./image_line.png')
 			  p File.dirname('image_line.png')
 
-			  image  = vision.image './image_line.png'
+			  image  = vision.image 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRafuUraaIa2npZ1GzxbJG0UJnXMY9fPf5JIqx0RKwKr70FnFetAw'
 
 			  # puts image.text
 
