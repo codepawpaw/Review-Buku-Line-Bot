@@ -87,9 +87,10 @@ class MainBotController < ApplicationController
 			  p 'masuk mas'
 			  binary_data = Base64.decode64(response.body)
 			  f = File.open('image_line.png', 'wb') {|f| f.write(binary_data)}
+			  p File.basename('./image_line.png')
 			  p File.dirname('image_line.png')
 
-			  #image  = vision.image 'image_line.png'
+			  image  = vision.image './image_line.png'
 
 			  # puts image.text
 
