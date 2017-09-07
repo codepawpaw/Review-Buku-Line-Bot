@@ -86,10 +86,10 @@ class MainBotController < ApplicationController
 			when Net::HTTPSuccess then
 			  p 'masuk mas'
 			  binary_data = Base64.decode64(response.body)
-			  f = File.open('file_name', 'wb') {|f| f.write(binary_data)}
+			  f = File.open('image_line.png', 'wb') {|f| f.write(binary_data)}
 			  p f
 
-			  image  = vision.image f
+			  image  = vision.image 'image_line.png'
 
 			  # puts image.text
 
