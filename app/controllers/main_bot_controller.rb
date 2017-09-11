@@ -21,6 +21,11 @@ class MainBotController < ApplicationController
 	  }
 	end
 
+	def test
+		image  = vision.image 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRafuUraaIa2npZ1GzxbJG0UJnXMY9fPf5JIqx0RKwKr70FnFetAw'
+		p image
+	end
+
 	def index
 	  body = request.body.read
 
@@ -84,17 +89,14 @@ class MainBotController < ApplicationController
 
 			case response
 			when Net::HTTPSuccess then
-			  p 'masuk mas'
 			  binary_data = Base64.decode64(response.body)
 			  f = File.open('image_line.png', 'wb') {|f| f.write(binary_data)}
 			  p File.basename('./image_line.png')
 			  p File.dirname('image_line.png')
 
-			  image  = vision.image 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRafuUraaIa2npZ1GzxbJG0UJnXMY9fPf5JIqx0RKwKr70FnFetAw'
+			  # image  = vision.image 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRafuUraaIa2npZ1GzxbJG0UJnXMY9fPf5JIqx0RKwKr70FnFetAw'
 
 			  # puts image.text
-
-			  p "end"
 			else
 			  p "#{response.code} #{response.body}"
 			end
@@ -108,9 +110,5 @@ class MainBotController < ApplicationController
 	  }
 
 	  json_response([])
-	end
-
-	def show
-		p "show"
 	end
 end
