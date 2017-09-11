@@ -1,0 +1,6 @@
+websocket:
+  build: .
+  container_name: bot_review_buku
+  ports:
+    - 3000:3000
+  restart: always
