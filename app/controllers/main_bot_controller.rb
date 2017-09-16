@@ -6,13 +6,6 @@ class MainBotController < ApplicationController
 	require 'line/bot'
 	require 'rest-client'
   	require 'nokogiri'
-  	require 'tempfile'
-
-  	require "google/cloud/vision"
-
-  	def vision
-  	  @vision ||= Google::Cloud::Vision.new project: 'baca-pesat'
-  	end
 
 	def client
 	  @client ||= Line::Bot::Client.new { |config|
@@ -87,31 +80,6 @@ class MainBotController < ApplicationController
 			}
 	        client.reply_message(event['replyToken'], text_message)
 		  end
-
-		  if event.type == Line::Bot::Event::MessageType::Image
-		  	p event.message['id']
-	        response = client.get_message_content(event.message['id'])
-
-			case response
-			when Net::HTTPSuccess then
-			  binary_data = Base64.decode64(response.body)
-			  f = File.open('image_line.png', 'wb') {|f| f.write(binary_data)}
-			  p File.basename('./image_line.png')
-			  p File.dirname('image_line.png')
-
-			  # image  = vision.image 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRafuUraaIa2npZ1GzxbJG0UJnXMY9fPf5JIqx0RKwKr70FnFetAw'
-
-			  # puts image.text
-			else
-			  p "#{response.code} #{response.body}"
-			end
-
-	        text_message = {
-		        type: 'text',
-		        text: 'image message'
-			}
-	        client.reply_message(event['replyToken'], text_message)
-	      end
 	  }
 
 	  json_response([])
