@@ -13,12 +13,7 @@ class MainBotController < ApplicationController
 	    config.channel_token = "IkgWgy3zjhWfy0V7sF90RqC655An+TGB/kIHzK9YWe78V/dmbBbwdU3aFufvF4+RBK3c4gno7TPoP04IqhQgIQvkiwuaqyXBaARZC/M0lwDDo1BbosW4IKr+AZyxSCHP2B/8puctiyCdtTuWrbg8PQdB04t89/1O/w1cDnyilFU="
 	  }
 	end
-
-	def test
-		image  = vision.image 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRafuUraaIa2npZ1GzxbJG0UJnXMY9fPf5JIqx0RKwKr70FnFetAw'
-		p image
-	end
-
+	
 	def index
 	  body = request.body.read
 
