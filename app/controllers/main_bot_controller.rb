@@ -27,18 +27,18 @@ class MainBotController < ApplicationController
 	end
 
 	def index
-	  # body = request.body.read
+	  body = request.body.read
 
-	  # signature = request.env['HTTP_X_LINE_SIGNATURE']
-	  # unless client.validate_signature(body, signature)
-	  #   error 400 do 'Bad Request' end
-	  # end
+	  signature = request.env['HTTP_X_LINE_SIGNATURE']
+	  unless client.validate_signature(body, signature)
+	    error 400 do 'Bad Request' end
+	  end
 
-	  # events = client.parse_events_from(body)
+	  events = client.parse_events_from(body)
 
-	  # events.each { |event|
+	  events.each { |event|
 
-	  #     if event.type == Line::Bot::Event::MessageType::Text
+	      if event.type == Line::Bot::Event::MessageType::Text
 	  #       url = "https://www.goodreads.com/search/index.xml?key=hfQfAv9UN6tjGlTMKj0qtw&q=" + event.message['text']
 			# response = RestClient.get url
 
@@ -80,34 +80,39 @@ class MainBotController < ApplicationController
 			#     counter = counter + 1
 			    
 			# end
-			# client.reply_message(event['replyToken'], @messages[0..3])
-		 #  end
+			#client.reply_message(event['replyToken'], @messages[0..3])
+			@m = {
+				type: 'text',
+				text: 'test'
+			}
+			client.reply_message(event['replyToken'], @m)
+		  end
 
-		 #  if event.type == Line::Bot::Event::MessageType::Image
-		 #  	p event.message['id']
-	  #       response = client.get_message_content(event.message['id'])
+		  if event.type == Line::Bot::Event::MessageType::Image
+		  	p event.message['id']
+	        response = client.get_message_content(event.message['id'])
 
-			# case response
-			# when Net::HTTPSuccess then
-			#   binary_data = Base64.decode64(response.body)
-			#   f = File.open('image_line.png', 'wb') {|f| f.write(binary_data)}
-			#   p File.basename('./image_line.png')
-			#   p File.dirname('image_line.png')
+			case response
+			when Net::HTTPSuccess then
+			  binary_data = Base64.decode64(response.body)
+			  f = File.open('image_line.png', 'wb') {|f| f.write(binary_data)}
+			  p File.basename('./image_line.png')
+			  p File.dirname('image_line.png')
 
-			#   # image  = vision.image 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRafuUraaIa2npZ1GzxbJG0UJnXMY9fPf5JIqx0RKwKr70FnFetAw'
+			  # image  = vision.image 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRafuUraaIa2npZ1GzxbJG0UJnXMY9fPf5JIqx0RKwKr70FnFetAw'
 
-			#   # puts image.text
-			# else
-			#   p "#{response.code} #{response.body}"
-			# end
+			  # puts image.text
+			else
+			  p "#{response.code} #{response.body}"
+			end
 
-	  #       text_message = {
-		 #        type: 'text',
-		 #        text: 'image message'
-			# }
-	  #       client.reply_message(event['replyToken'], text_message)
-	  #     end
-	  # }
+	        text_message = {
+		        type: 'text',
+		        text: 'image message'
+			}
+	        client.reply_message(event['replyToken'], text_message)
+	      end
+	  }
 
 	  json_response([])
 	end
