@@ -80,12 +80,12 @@ class MainBotController < ApplicationController
 			#     counter = counter + 1
 			    
 			# end
-			#client.reply_message(event['replyToken'], @messages[0..3])
-			@m = {
-				type: 'text',
-				text: 'test'
+			# client.reply_message(event['replyToken'], @messages[0..3])
+			text_message = {
+		        type: 'text',
+		        text: 'test'
 			}
-			client.reply_message(event['replyToken'], @m)
+	        client.reply_message(event['replyToken'], text_message)
 		  end
 
 		  if event.type == Line::Bot::Event::MessageType::Image
